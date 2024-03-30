@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://catupiy4a6myb"]
+
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/steam_p2p_manager.gd" id="1_oiig6"]
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/steam_p2p_connection_menu.gd" id="2_7k7xf"]
+[ext_resource type="PackedScene" uid="uid://byjwf3em4b8hw" path="res://COGITO/SteamP2PCoop/MP_Demo_Level.tscn" id="3_apu44"]
+
+[node name="SteamP2PCoopDemo" type="Node3D"]
+
+[node name="SteamP2PManager" type="Node" parent="."]
+script = ExtResource("1_oiig6")
+
+[node name="SteamP2PConnectionMenu" type="Node2D" parent="."]
+script = ExtResource("2_7k7xf")
+start_level = ExtResource("3_apu44")
+
+[node name="HostButton" type="Button" parent="SteamP2PConnectionMenu"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="SteamP2PConnectionMenu/HostButton" to="SteamP2PConnectionMenu" method="_on_host_button_pressed"]

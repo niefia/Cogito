@@ -254,6 +254,9 @@ func _on_pause_menu_resume():
 
 
 func _input(event):
+	if !is_multiplayer_authority():
+		return
+	
 	if event is InputEventMouseMotion and !is_movement_paused:
 		if is_free_looking:
 			neck.rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))
@@ -383,6 +386,9 @@ func _process_on_ladder(_delta):
 var jumped_from_slide = false
 
 func _physics_process(delta):
+	if !is_multiplayer_authority():
+		return
+	
 	#if is_movement_paused:
 		#return
 		

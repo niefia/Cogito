@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://byjwf3em4b8hw"]
+
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/steam_multiplayer_spawner.gd" id="1_o2bdw"]
+[ext_resource type="PackedScene" uid="uid://cdw763d6olrcm" path="res://COGITO/SteamP2PCoop/player_P2P_Coop.tscn" id="2_oeqvf"]
+
+[node name="DemoLevel" type="Node3D"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath(".")
+script = ExtResource("1_o2bdw")
+player_scene = ExtResource("2_oeqvf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 0.2, 20)
