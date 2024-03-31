@@ -5,14 +5,6 @@
 [ext_resource type="Material" uid="uid://c4rvflucftsrl" path="res://COGITO/DynamicFootstepSystem/Assets/Materials/Example_Wood.tres" id="2_ujadh"]
 [ext_resource type="Material" uid="uid://dkbgl3p3ffd1" path="res://COGITO/Assets/Materials/Prototype_DarkGrey.tres" id="3_df2e4"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_do35g"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vlq2o"]
 material = ExtResource("2_ujadh")
 radius = 0.4
@@ -22,17 +14,25 @@ height = 1.7
 material = ExtResource("3_df2e4")
 size = Vector3(0.5, 0.2, 0.5)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_do35g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="PlayerP2PCoop" instance=ExtResource("1_2od37")]
 
 [node name="Camera" parent="Neck/Head/Eyes" index="1"]
 script = ExtResource("2_85c8d")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="15"]
-replication_config = SubResource("SceneReplicationConfig_do35g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="16"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="15"]
 mesh = SubResource("CapsuleMesh_vlq2o")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63374, -0.112037)
 mesh = SubResource("BoxMesh_6opph")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="16"]
+replication_config = SubResource("SceneReplicationConfig_do35g")

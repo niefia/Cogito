@@ -195,6 +195,9 @@ func _ready():
 	
 	call_deferred("slide_audio_init")
 
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
+
 func slide_audio_init():
 	#setup sound effect for sliding
 	slide_audio_player = Audio.play_sound_3d(slide_sound, false)
@@ -254,7 +257,7 @@ func _on_pause_menu_resume():
 
 
 func _input(event):
-	if !is_multiplayer_authority():
+	if not is_multiplayer_authority():
 		return
 	
 	if event is InputEventMouseMotion and !is_movement_paused:
@@ -386,7 +389,7 @@ func _process_on_ladder(_delta):
 var jumped_from_slide = false
 
 func _physics_process(delta):
-	if !is_multiplayer_authority():
+	if not is_multiplayer_authority():
 		return
 	
 	#if is_movement_paused:
