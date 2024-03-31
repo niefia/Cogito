@@ -1,16 +1,15 @@
 extends Node
 
 @export var start_level : PackedScene
-
-@onready var multiplayer_level_spawner = $"../MultiplayerLevelSpawner"
+@export var multiplayer_level_spawner : MultiplayerSpawner
+@export var ui_parent : Node
+@export var lobbies_container : Container
 
 var lobby_id : int = 0
 var steam_peer := SteamMultiplayerPeer.new()
 var enet_peer := ENetMultiplayerPeer.new()
 
 
-## TODO: Get rid of hard line references to nodes
-## TODO: Maybe make this all into some kind of packed scene
 ## TODO: HUD
 ## TODO: Escape Menu
 ## TODO: Make interface part of the escape menu tabs
@@ -18,8 +17,8 @@ var enet_peer := ENetMultiplayerPeer.new()
 ## TODO: Make Steam/LAN some kind of toggle
 ## TODO: Move LAN to a separate menu and script
 ## TODO: Allow clients to set a LAN IP to join
-## TODO: Make the code to hide the UI more clean
 ## TODO: Add Callbacks with logs for connected_to_server, connection failed, server disconnected
+
 
 func _ready():
 	multiplayer_level_spawner.spawn_function = _spawn_level
@@ -35,24 +34,12 @@ func _spawn_level(packed_scene_path : String) -> Node:
 	return scene
 
 
+#region Steam
 func _on_host_steam_button_pressed():
 	## TODO: allow host to set the lobby visibility
 	steam_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC)
 	multiplayer.multiplayer_peer = steam_peer
 	multiplayer_level_spawner.spawn(start_level.resource_path)
-
-
-func _on_host_lan_button_pressed():
-	## TODO: Allow host to set port
-	enet_peer.create_server(1027)
-	multiplayer.multiplayer_peer = enet_peer
-	multiplayer_level_spawner.spawn(start_level.resource_path)
-	$HostSteamButton.hide()
-	$HostLanButton.hide()
-	$LobbiesListScrollContainer/LobbiesVBoxContainer.hide()
-	$RefreshButton.hide()
-	$JoinLocalhostButton.hide()
-
 
 ## once the host button has been pressed, and the lobby is created, this will end up being called
 func _on_lobby_created(connection_status, id):
@@ -61,11 +48,7 @@ func _on_lobby_created(connection_status, id):
 		## TODO: Allow host to set Lobby Name
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName() + "'s Lobby"))
 		Steam.setLobbyJoinable(lobby_id, true)
-		$HostSteamButton.hide()
-		$HostLanButton.hide()
-		$LobbiesListScrollContainer/LobbiesVBoxContainer.hide()
-		$RefreshButton.hide()
-		$JoinLocalhostButton.hide()
+		ui_parent.hide()
 
 
 ## used when clicking a related lobby button
@@ -73,11 +56,7 @@ func join_lobby(id : int):
 	steam_peer.connect_lobby(id)
 	multiplayer.multiplayer_peer = steam_peer
 	lobby_id = id
-	$HostSteamButton.hide()
-	$HostLanButton.hide()
-	$LobbiesListScrollContainer/LobbiesVBoxContainer.hide()
-	$RefreshButton.hide()
-	$JoinLocalhostButton.hide()
+	ui_parent.hide()
 
 
 ## used to get a list of available lobbies to join
@@ -100,23 +79,31 @@ func _on_lobby_match_list(lobbies):
 		button.set_size(Vector2(100,5))
 		button.connect("pressed", Callable(self, "join_lobby").bind(lobby))
 		
-		$LobbiesListScrollContainer/LobbiesVBoxContainer.add_child(button)
+		lobbies_container.add_child(button)
 
 
 func _on_refresh_button_pressed():
-	if $LobbiesListScrollContainer/LobbiesVBoxContainer.get_child_count() > 0:
-		for child in $LobbiesListScrollContainer/LobbiesVBoxContainer.get_children():
+	if lobbies_container.get_child_count() > 0:
+		for child in lobbies_container.get_children():
 			child.queue_free()
 	
 	open_lobby_list()
+#endregion
+
+
+#region LAN
+func _on_host_lan_button_pressed():
+	## TODO: Allow host to set port
+	enet_peer.create_server(1027)
+	multiplayer.multiplayer_peer = enet_peer
+	multiplayer_level_spawner.spawn(start_level.resource_path)
+	ui_parent.hide()
 
 
 func _on_join_localhost_button_pressed():
 	## TODO: Allow client to define IP and port to join
 	enet_peer.create_client("127.0.0.1", 1027)
 	multiplayer.multiplayer_peer = enet_peer
-	$HostSteamButton.hide()
-	$HostLanButton.hide()
-	$LobbiesListScrollContainer/LobbiesVBoxContainer.hide()
-	$RefreshButton.hide()
-	$JoinLocalhostButton.hide()
+	ui_parent.hide()
+
+#endregion
