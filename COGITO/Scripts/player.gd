@@ -1,3 +1,4 @@
+class_name CogitoPlayer
 extends CharacterBody3D
 
 signal menu_pressed(player_interaction_component: PlayerInteractionComponent) #Used to exit out other interfaces when ESC/Menu is pressed.
@@ -195,9 +196,6 @@ func _ready():
 	
 	call_deferred("slide_audio_init")
 
-func _enter_tree():
-	set_multiplayer_authority(name.to_int())
-
 func slide_audio_init():
 	#setup sound effect for sliding
 	slide_audio_player = Audio.play_sound_3d(slide_sound, false)
@@ -258,9 +256,6 @@ func _on_pause_menu_resume():
 
 
 func _input(event):
-	if not is_multiplayer_authority():
-		return
-	
 	if event is InputEventMouseMotion and !is_movement_paused:
 		if is_free_looking:
 			neck.rotate_y(deg_to_rad(-event.relative.x * MOUSE_SENS))
@@ -390,9 +385,6 @@ func _process_on_ladder(_delta):
 var jumped_from_slide = false
 
 func _physics_process(delta):
-	if not is_multiplayer_authority():
-		return
-	
 	#if is_movement_paused:
 		#return
 		

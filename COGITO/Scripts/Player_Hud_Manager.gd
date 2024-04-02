@@ -1,3 +1,4 @@
+class_name CogitoPlayerHudManager
 extends Control
 
 signal show_inventory

@@ -26,6 +26,10 @@ Audio="*res://addons/quick_audio/./Audio.gd"
 CogitoSceneManager="*res://COGITO/SceneManagement/cogito_scene_manager.gd"
 CogitoQuestManager="*res://COGITO/QuestSystemPD/CogitoQuestManager.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1280

@@ -1,3 +1,4 @@
+class_name CogitoPauseMenuController
 extends Control
 signal resume
 signal back_to_main_pressed

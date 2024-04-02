@@ -1,0 +1,53 @@
+extends Node
+
+var multiplayer_pause_menu : CogitoMultiplayerPauseMenu
+var player_hud : CogitoPlayerHudManager
+var enet_peer := ENetMultiplayerPeer.new()
+var multiplayer_player_spawner : MultiplayerPlayerSpawner
+
+@export var multiplayer_hint_icon : Texture2D
+
+func _ready():
+	multiplayer_pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false)
+	player_hud = get_tree().root.find_child("Player_HUD", true, false)
+	multiplayer_player_spawner = get_tree().root.find_child("MultiplayerPlayerSpawner", true, false)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	
+	#TODO: multiplayer.peer_connected.connect(_on_peer_connected)
+	#TODO: multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	#TODO: multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+# TODO: UPNP port forwarding? https://docs.godotengine.org/en/stable/classes/class_enetmultiplayerpeer.html
+# TODO: Fix the extra escape press needed after the menu is closed here and steam
+# TODO: Close any open connections before joining or hosting
+# TODO: Handle disconnects
+
+func _on_host_lan_button_pressed():
+	## TODO: Allow host to set port
+	enet_peer.create_server(1027)
+	multiplayer.multiplayer_peer = enet_peer
+	multiplayer_pause_menu.close_pause_menu()
+	print("Server opened on port %s" % 1027)
+	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Server Started")
+	
+	#spawn the host player
+	multiplayer_player_spawner.spawn_host()
+
+
+func _on_join_localhost_button_pressed():
+	## TODO: Allow player to set client ip and port to join
+	enet_peer.create_client("127.0.0.1", 1027)
+	multiplayer.multiplayer_peer = enet_peer
+	multiplayer_pause_menu.close_pause_menu()
+	print("Connecting to %s:%s" % ["127.0.0.1", 1027])
+	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Connecting to %s:%s" % ["127.0.0.1", 1027])
+
+
+func _on_connection_failed():
+	print("Connection to Server Failed")
+	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Connection to Server Failed")
+
+func _on_connected_to_server():
+	print("Connected Successfully")
+	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Connected to Server")

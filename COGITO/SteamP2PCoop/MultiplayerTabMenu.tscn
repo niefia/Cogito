@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://r2ue7e8rdhlc"]
+
+[ext_resource type="FontFile" uid="uid://bfavdpnmorag5" path="res://COGITO/Assets/Fonts/Montserrat/Montserrat-Regular.ttf" id="1_qpuqo"]
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/multiplayer_tab_menu.gd" id="2_r85pm"]
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/steam_p2p_connection_manager.gd" id="3_hlkti"]
+[ext_resource type="Script" path="res://COGITO/EasyMenus/Scripts/follow_focus_center.gd" id="3_m8cii"]
+[ext_resource type="Texture2D" uid="uid://ctlfxilur7bll" path="res://COGITO/SteamP2PCoop/Assets/Hint_Online.png" id="4_w1wy8"]
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/lan_p2p_connection_manager.gd" id="5_qo218"]
+
+[node name="MultiplayerTabMenu" type="TabContainer" node_paths=PackedStringArray("nodes_to_focus", "steam_p2p_connection_menu")]
+custom_minimum_size = Vector2(500, 500)
+offset_right = 500.0
+offset_bottom = 500.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_qpuqo")
+script = ExtResource("2_r85pm")
+nodes_to_focus = [NodePath("Steam/ScrollContainer/VBoxContainer/HostSteamButton"), NodePath("LAN/ScrollContainer/VBoxContainer/HostLanButton")]
+steam_p2p_connection_menu = NodePath("Steam")
+
+[node name="Steam" type="MarginContainer" parent="." node_paths=PackedStringArray("lobbies_container")]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 25
+script = ExtResource("3_hlkti")
+multiplayer_hint_icon = ExtResource("4_w1wy8")
+lobbies_container = NodePath("ScrollContainer/VBoxContainer/LobbiesVBoxContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Steam"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_m8cii")
+transition_time = 0.15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Steam/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="HostSteamButton" type="Button" parent="Steam/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host via Steam"
+
+[node name="RefreshButton" type="Button" parent="Steam/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Refresh Lobby List"
+
+[node name="LobbiesVBoxContainer" type="VBoxContainer" parent="Steam/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LAN" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 25
+script = ExtResource("5_qo218")
+multiplayer_hint_icon = ExtResource("4_w1wy8")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LAN"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_m8cii")
+transition_time = 0.15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LAN/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="HostLanButton" type="Button" parent="LAN/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host via LAN"
+
+[node name="JoinLocalhostButton" type="Button" parent="LAN/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join Localhost"
+
+[connection signal="pressed" from="Steam/ScrollContainer/VBoxContainer/HostSteamButton" to="Steam" method="_on_host_steam_button_pressed"]
+[connection signal="pressed" from="Steam/ScrollContainer/VBoxContainer/RefreshButton" to="Steam" method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="LAN/ScrollContainer/VBoxContainer/HostLanButton" to="LAN" method="_on_host_lan_button_pressed"]
+[connection signal="pressed" from="LAN/ScrollContainer/VBoxContainer/JoinLocalhostButton" to="LAN" method="_on_join_localhost_button_pressed"]
