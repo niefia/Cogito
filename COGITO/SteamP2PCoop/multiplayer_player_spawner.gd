@@ -10,10 +10,12 @@ var players = {}
 var player_position : Vector3 = Vector3.ZERO
 var player_rotation : Vector3 = Vector3.ZERO
 
+## TODO: Clients should be placed in the same location as the host when they join
+
 func _ready():
 	spawn_function = _spawn_player
 
-func spawn_host():
+func spawn_player():
 	if is_multiplayer_authority():
 		
 		destroy_single_player()
@@ -21,10 +23,6 @@ func spawn_host():
 		
 		multiplayer.peer_connected.connect(spawn)
 		multiplayer.peer_disconnected.connect(_despawn_player)
-
-func spawn_client(id : int):
-	destroy_single_player()
-	_spawn_player(id)
 	
 func destroy_single_player():
 	var player : Node = get_tree().root.find_child("Player", true, false)

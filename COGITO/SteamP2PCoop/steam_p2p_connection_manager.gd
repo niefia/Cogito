@@ -88,7 +88,7 @@ func _on_lobby_created(connection_status, id):
 		player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Lobby Created Successfully")
 		
 		#spawn the host player
-		multiplayer_player_spawner.spawn_host()
+		multiplayer_player_spawner.spawn_player()
 
 
 ## used when clicking a related lobby button
@@ -104,6 +104,9 @@ func _on_lobby_joined(_this_lobby_id: int, _permissions: int, _locked: bool, _re
 	multiplayer_pause_menu.close_pause_menu()
 	print("Lobby Joined Successfully")
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Lobby Joined Successfully")
+	
+	#spawn the client player
+	multiplayer_player_spawner.spawn_player()
 
 ## called by the refresh button in the ui
 func _on_refresh_button_pressed():

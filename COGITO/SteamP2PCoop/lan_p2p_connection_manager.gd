@@ -32,7 +32,7 @@ func _on_host_lan_button_pressed():
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Server Started")
 	
 	#spawn the host player
-	multiplayer_player_spawner.spawn_host()
+	multiplayer_player_spawner.spawn_player()
 
 
 func _on_join_localhost_button_pressed():
@@ -51,3 +51,6 @@ func _on_connection_failed():
 func _on_connected_to_server():
 	print("Connected Successfully")
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Connected to Server")
+
+	#spawn the client player
+	multiplayer_player_spawner.spawn_player()

@@ -13,7 +13,7 @@ height = 1.7
 
 [sub_resource type="BoxMesh" id="BoxMesh_6opph"]
 material = ExtResource("5_5o2oq")
-size = Vector3(0.5, 0.2, 0.5)
+size = Vector3(0.5, 0.25, 0.5)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_do35g"]
 properties/0/path = NodePath(".:position")
@@ -29,11 +29,11 @@ script = ExtResource("2_0gpnc")
 [node name="Camera" parent="Neck/Head/Eyes" index="1"]
 script = ExtResource("3_pg1i5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="15"]
+[node name="PlayerCapsuleMeshInstance3D" type="MeshInstance3D" parent="." index="15"]
 mesh = SubResource("CapsuleMesh_vlq2o")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63374, -0.112037)
+[node name="PlayerGlassesMeshInstance3D" type="MeshInstance3D" parent="PlayerCapsuleMeshInstance3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.667003, -0.0824701)
 mesh = SubResource("BoxMesh_6opph")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="16"]
