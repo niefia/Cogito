@@ -1,20 +1,29 @@
 class_name SteamP2PConnectionMenu
 extends Node
-
-var multiplayer_pause_menu : CogitoMultiplayerPauseMenu
-var player_hud : CogitoPlayerHudManager
-var multiplayer_player_spawner : MultiplayerPlayerSpawner
-
-@export var multiplayer_hint_icon : Texture2D
-@export var lobbies_container : Container
-
-var lobby_id : int = 0
-var steam_peer := SteamMultiplayerPeer.new()
+## Manager for client and host for Steam Lobbies
 
 # TODO: Friends Lobbies: https://godotsteam.com/tutorials/friends_lobbies/
 # TODO: Fix the extra escape press needed after the menu is closed here and lan
 # TODO: Close any open connections before joining or hosting
 # TODO: Handle Disconnects
+
+# TODO: Steam.join_requested.connect(_on_lobby_join_requested)
+# TODO: Steam.lobby_chat_update.connect(_on_lobby_chat_update)
+# TODO: Steam.lobby_data_update.connect(_on_lobby_data_update)
+# TODO: Steam.lobby_invite.connect(_on_lobby_invite)
+# TODO: Steam.lobby_message.connect(_on_lobby_message)
+# TODO: Steam.persona_state_change.connect(_on_persona_change)
+
+@export var multiplayer_hint_icon : Texture2D
+@export var lobbies_container : Container
+
+var multiplayer_pause_menu : CogitoMultiplayerPauseMenu
+var player_hud : CogitoPlayerHudManager
+var multiplayer_player_spawner : MultiplayerPlayerSpawner
+
+var lobby_id : int = 0
+var steam_peer := SteamMultiplayerPeer.new()
+
 
 func _ready():
 	multiplayer_pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false)
@@ -23,13 +32,6 @@ func _ready():
 	steam_peer.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	Steam.lobby_joined.connect(_on_lobby_joined)
-	
-	# TODO: Steam.join_requested.connect(_on_lobby_join_requested)
-	# TODO: Steam.lobby_chat_update.connect(_on_lobby_chat_update)
-	# TODO: Steam.lobby_data_update.connect(_on_lobby_data_update)
-	# TODO: Steam.lobby_invite.connect(_on_lobby_invite)
-	# TODO: Steam.lobby_message.connect(_on_lobby_message)
-	# TODO: Steam.persona_state_change.connect(_on_persona_change)
 
 
 ## used to get a list of available lobbies to join
@@ -99,6 +101,7 @@ func join_lobby(id : int):
 	print("Joining Lobby:%s" % id)
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Joining Lobby...")
 
+
 func _on_lobby_joined(_this_lobby_id: int, _permissions: int, _locked: bool, _response: int):
 	## TODO: Add a Cogito log
 	multiplayer_pause_menu.close_pause_menu()
@@ -107,6 +110,7 @@ func _on_lobby_joined(_this_lobby_id: int, _permissions: int, _locked: bool, _re
 	
 	#spawn the client player
 	multiplayer_player_spawner.spawn_player()
+
 
 ## called by the refresh button in the ui
 func _on_refresh_button_pressed():

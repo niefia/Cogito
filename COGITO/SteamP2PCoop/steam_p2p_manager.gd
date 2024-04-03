@@ -1,4 +1,5 @@
 extends Node
+## Setup Steam Environment, setup callbacks
 
 ## Set this to whatever your SteamAppID is. 480 will work fine for testing.
 @export var SteamAppID : int = 480

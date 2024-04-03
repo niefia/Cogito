@@ -1,5 +1,8 @@
 class_name MultiplayerPlayerSpawner
 extends MultiplayerSpawner
+## Spawn players for host and client into an MP game
+
+## TODO: Clients should be placed in the same location as the host when they join
 
 @export var player_scene : PackedScene
 
@@ -10,10 +13,9 @@ var players = {}
 var player_position : Vector3 = Vector3.ZERO
 var player_rotation : Vector3 = Vector3.ZERO
 
-## TODO: Clients should be placed in the same location as the host when they join
-
 func _ready():
 	spawn_function = _spawn_player
+
 
 func spawn_player():
 	if is_multiplayer_authority():
@@ -23,6 +25,7 @@ func spawn_player():
 		
 		multiplayer.peer_connected.connect(spawn)
 		multiplayer.peer_disconnected.connect(_despawn_player)
+	
 	
 func destroy_single_player():
 	var player : Node = get_tree().root.find_child("Player", true, false)
@@ -36,6 +39,7 @@ func destroy_single_player():
 		player.queue_free()
 	else:
 		printerr("No single player was found to destroy")
+
 
 func _spawn_player(id = 1) -> Node:
 	var player : Node = player_scene.instantiate()
@@ -61,6 +65,7 @@ func _spawn_player(id = 1) -> Node:
 		player.rotation = player_rotation
 		
 	return player
+
 
 func _despawn_player(id):
 	players[id].queue_free()

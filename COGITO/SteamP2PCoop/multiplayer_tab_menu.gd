@@ -1,7 +1,8 @@
 class_name MultiplayerTabMenu
-
-
 extends TabContainer
+## A Connection menu system
+
+#TODO: Make a base class that includes nodes to focus and the input function so TabMenus can inherit from them.
 
 @export var nodes_to_focus: Array[Control]
 @export var steam_p2p_connection_menu : SteamP2PConnectionMenu

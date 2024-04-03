@@ -1,5 +1,8 @@
 class_name CogitoMultiplayerPauseMenu
 extends CogitoPauseMenuController
+## Extend the pause menu controller to include a multiplayer menu
+
+## TODO: Commit a classname to the base class in base COGITO
 
 @export var multiplayer_tab_menu: MultiplayerTabMenu
 
@@ -9,9 +12,11 @@ func open_multiplayer_menu():
 	multiplayer_tab_menu.refresh_servers()
 	game_menu.hide()
 
+
 func open_pause_menu():
 	super()
 	get_tree().paused = false
+
 
 func _input(event):
 	if (event.is_action_pressed("ui_cancel") or event.is_action_pressed("pause")) and !game_menu.visible:

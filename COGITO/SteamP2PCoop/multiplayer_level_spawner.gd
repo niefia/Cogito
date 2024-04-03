@@ -1,5 +1,7 @@
 class_name MultiplayerLevelSpawner
 extends MultiplayerSpawner
+## Spawn in a single player level and convert it for MP use.
+## This also synchronizes which level is currently loaded for all players.
 
 @export var start_level : PackedScene
 @export var multiplayer_pause_menu : PackedScene
@@ -12,10 +14,12 @@ func _ready():
 	spawn(start_level.resource_path)
 	call_deferred("_replace_pause_menu_with_mp_version")
 
+
 ## called when the level is spawned by the multiplayer spawner
 func _spawn_level(packed_scene_path : String) -> Node:
 	var scene : Node = load(packed_scene_path).instantiate()
 	return scene
+
 
 func _replace_pause_menu_with_mp_version():
 	var pause_menu = find_child("PauseMenu", true, false)

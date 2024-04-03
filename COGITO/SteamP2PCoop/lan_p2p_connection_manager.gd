@@ -1,11 +1,20 @@
 extends Node
+## Manages connections, hosting, and disconnect for LAN games
+
+#TODO: multiplayer.peer_connected.connect(_on_peer_connected)
+#TODO: multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+#TODO: multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+# TODO: UPNP port forwarding? https://docs.godotengine.org/en/stable/classes/class_enetmultiplayerpeer.html
+# TODO: Fix the extra escape press needed after the menu is closed here and steam
+# TODO: Close any open connections before joining or hosting
+
+@export var multiplayer_hint_icon : Texture2D
 
 var multiplayer_pause_menu : CogitoMultiplayerPauseMenu
 var player_hud : CogitoPlayerHudManager
 var enet_peer := ENetMultiplayerPeer.new()
 var multiplayer_player_spawner : MultiplayerPlayerSpawner
-
-@export var multiplayer_hint_icon : Texture2D
 
 func _ready():
 	multiplayer_pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false)
@@ -13,15 +22,7 @@ func _ready():
 	multiplayer_player_spawner = get_tree().root.find_child("MultiplayerPlayerSpawner", true, false)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
-	
-	#TODO: multiplayer.peer_connected.connect(_on_peer_connected)
-	#TODO: multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	#TODO: multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-# TODO: UPNP port forwarding? https://docs.godotengine.org/en/stable/classes/class_enetmultiplayerpeer.html
-# TODO: Fix the extra escape press needed after the menu is closed here and steam
-# TODO: Close any open connections before joining or hosting
-# TODO: Handle disconnects
 
 func _on_host_lan_button_pressed():
 	## TODO: Allow host to set port
@@ -47,6 +48,7 @@ func _on_join_localhost_button_pressed():
 func _on_connection_failed():
 	print("Connection to Server Failed")
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Connection to Server Failed")
+
 
 func _on_connected_to_server():
 	print("Connected Successfully")
