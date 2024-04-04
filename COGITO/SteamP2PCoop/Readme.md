@@ -3,6 +3,6 @@ This replaces the P2P networking system in Godot with Steam's P2P Framework.
 
 Make sure you set your SteamAppID in Steam.gd
 
-Run from SteamP2PCoopDemo in COGITO/SteamP2PCoop
+Run from project from the main scene
 Open the pause menu 
 Use the new multiplayer menu

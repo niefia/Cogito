@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bybi44wiigdhp"]
+
+[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://COGITO/EasyMenus/Scenes/PauseMenu.tscn" id="1_7wtvd"]
+[ext_resource type="Script" path="res://COGITO/Theme/CogitoUiButton.gd" id="2_atnxx"]
+[ext_resource type="Script" path="res://COGITO/SteamP2PCoop/multiplayer_pause_menu_controller.gd" id="2_saq0q"]
+[ext_resource type="PackedScene" uid="uid://r2ue7e8rdhlc" path="res://COGITO/SteamP2PCoop/Menus/MultiplayerTabMenu.tscn" id="4_ktan5"]
+
+[node name="MultiplayerPauseMenu" node_paths=PackedStringArray("multiplayer_tab_menu") instance=ExtResource("1_7wtvd")]
+script = ExtResource("2_saq0q")
+multiplayer_tab_menu = NodePath("Content/MultiplayerTabMenu")
+
+[node name="MultiplayerButton" type="Button" parent="Content/GameMenu/VBoxContainer" index="7"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Multiplayer"
+script = ExtResource("2_atnxx")
+
+[node name="OptionsTabMenu" parent="Content" index="3" node_paths=PackedStringArray("nodes_to_focus")]
+nodes_to_focus = [NodePath("Gameplay/ScrollContainer/VBoxContainer/InvertYAxisCheckButton"), NodePath("Graphics/ScrollContainer/VBoxContainer/HBoxContainer_WindowMode/WindowModeOptionButton"), NodePath("Audio/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeSlider"), null]
+
+[node name="MultiplayerTabMenu" parent="Content" index="4" node_paths=PackedStringArray("nodes_to_focus") instance=ExtResource("4_ktan5")]
+visible = false
+layout_mode = 2
+nodes_to_focus = [NodePath("../GameMenu/VBoxContainer/ResumeGameButton")]
+
+[connection signal="pressed" from="Content/GameMenu/VBoxContainer/MultiplayerButton" to="." method="open_multiplayer_menu"]

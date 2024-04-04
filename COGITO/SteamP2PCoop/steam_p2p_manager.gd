@@ -4,6 +4,8 @@ extends Node
 ## Set this to whatever your SteamAppID is. 480 will work fine for testing.
 @export var SteamAppID : int = 480
 
+## TODO: Properly test Steam connection
+## TODO: Extra player sitting around where the host was in Steam version?
 ## TODO: Setup main menu to run the MP demo
 ## TODO: Utilize Save and Load
 ## TODO: Add Callbacks for connected_to_server, connection failed, server disconnected
