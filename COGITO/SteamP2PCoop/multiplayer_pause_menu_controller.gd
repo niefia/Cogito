@@ -1,5 +1,5 @@
 class_name CogitoMultiplayerPauseMenu
-extends CogitoPauseMenuController
+extends CogitoPauseMenu
 ## Extend the pause menu controller to include a multiplayer menu
 
 ## TODO: Commit a classname to the base class in base COGITO
