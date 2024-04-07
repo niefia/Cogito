@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://COGITO/SteamP2PCoop/steam_p2p_manager.gd" id="1_h6p3p"]
 [ext_resource type="Script" path="res://COGITO/SteamP2PCoop/multiplayer_level_spawner.gd" id="3_nst55"]
-[ext_resource type="PackedScene" uid="uid://bybi44wiigdhp" path="res://COGITO/SteamP2PCoop/multiplayer_pause_menu.tscn" id="4_1yimj"]
+[ext_resource type="PackedScene" uid="uid://bybi44wiigdhp" path="res://COGITO/SteamP2PCoop/Menus/MultiplayerPauseMenu.tscn" id="4_1yimj"]
 [ext_resource type="PackedScene" uid="uid://e31n36p8i6an" path="res://COGITO/DemoScenes/COGITO_04_Demo_Lobby.tscn" id="4_nkyeu"]
 [ext_resource type="Script" path="res://COGITO/SteamP2PCoop/multiplayer_player_spawner.gd" id="5_oudq7"]
 [ext_resource type="PackedScene" uid="uid://cdw763d6olrcm" path="res://COGITO/SteamP2PCoop/MultiplayerPlayer.tscn" id="6_mrt2a"]
