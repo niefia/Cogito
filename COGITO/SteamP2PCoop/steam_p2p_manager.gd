@@ -5,13 +5,14 @@ extends Node
 @export var SteamAppID : int = 480
 
 # FIXME: Controller not working in game
-# FIXME: Once connected the pause menu closes once it is opened
 # TODO: Utilize Save and Load
 # TODO: Add Callbacks for connected_to_server, connection failed, server disconnected
 # TODO: Smoothing for current player synced variables
 # TODO: Sync player held items, and rotation
 # TODO: Vote kick
 # TODO: Handle player death
+# TODO: Once connected the multiplayer menu should reflect that
+# TODO: IE. disconnect on client, stop host on host
 
 
 func _ready():
