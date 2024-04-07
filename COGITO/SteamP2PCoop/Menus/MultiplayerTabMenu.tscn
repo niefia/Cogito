@@ -7,15 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://ctlfxilur7bll" path="res://COGITO/SteamP2PCoop/Assets/Hint_Online.png" id="4_w1wy8"]
 [ext_resource type="Script" path="res://COGITO/SteamP2PCoop/lan_p2p_connection_manager.gd" id="5_qo218"]
 
-[node name="MultiplayerTabMenu" type="TabContainer" node_paths=PackedStringArray("nodes_to_focus", "steam_p2p_connection_menu")]
+[node name="MultiplayerTabMenu" type="TabContainer" node_paths=PackedStringArray("steam_p2p_connection_menu", "nodes_to_focus")]
 custom_minimum_size = Vector2(500, 500)
 offset_right = 500.0
 offset_bottom = 500.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_qpuqo")
 script = ExtResource("2_r85pm")
-nodes_to_focus = [NodePath("Steam/ScrollContainer/VBoxContainer/HostSteamButton"), NodePath("LAN/ScrollContainer/VBoxContainer/HostLanButton")]
 steam_p2p_connection_menu = NodePath("Steam")
+nodes_to_focus = [NodePath("Steam/ScrollContainer/VBoxContainer/HostSteamButton"), NodePath("LAN/ScrollContainer/VBoxContainer/HostLanButton")]
 
 [node name="Steam" type="MarginContainer" parent="." node_paths=PackedStringArray("lobbies_container")]
 layout_mode = 2

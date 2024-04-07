@@ -19,9 +19,8 @@ script = ExtResource("2_atnxx")
 [node name="OptionsTabMenu" parent="Content" index="3" node_paths=PackedStringArray("nodes_to_focus")]
 nodes_to_focus = [NodePath("Gameplay/ScrollContainer/VBoxContainer/InvertYAxisCheckButton"), NodePath("Graphics/ScrollContainer/VBoxContainer/HBoxContainer_WindowMode/WindowModeOptionButton"), NodePath("Audio/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeSlider"), null]
 
-[node name="MultiplayerTabMenu" parent="Content" index="4" node_paths=PackedStringArray("nodes_to_focus") instance=ExtResource("4_ktan5")]
+[node name="MultiplayerTabMenu" parent="Content" index="4" instance=ExtResource("4_ktan5")]
 visible = false
 layout_mode = 2
-nodes_to_focus = [NodePath("../GameMenu/VBoxContainer/ResumeGameButton")]
 
 [connection signal="pressed" from="Content/GameMenu/VBoxContainer/MultiplayerButton" to="." method="open_multiplayer_menu"]

@@ -6,7 +6,6 @@ extends Node
 
 # TODO: Handle error: kEResultConnectFailed on client/server
 # TODO: Friends Lobbies: https://godotsteam.com/tutorials/friends_lobbies/
-# TODO: Fix the extra escape press needed after the menu is closed here and lan
 # TODO: Close any open connections before joining or hosting
 # TODO: Handle Disconnects
 
@@ -102,7 +101,6 @@ func join_lobby(id : int):
 
 ## called by both host and client after joining
 func _on_lobby_joined(_this_lobby_id: int, _permissions: int, _locked: bool, _response: int):
-	## TODO: Add a Cogito log
 	multiplayer_pause_menu.close_pause_menu()
 	print("Lobby Joined Successfully")
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Lobby Joined Successfully")

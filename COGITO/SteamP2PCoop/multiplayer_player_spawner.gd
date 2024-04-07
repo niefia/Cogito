@@ -60,11 +60,22 @@ func _spawn_player(id = 1) -> Node:
 		var player_hud = get_tree().root.find_child("Player_HUD", true, false)
 		player.player_hud = player_hud.get_path()
 		player_hud.player = player
-		player.pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false).get_path()
+		var pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false).get_path()
+		player.pause_menu = pause_menu
+		
+		# Pause Menu setup
+		if pause_menu:
+			var pause_menu_node = get_node(pause_menu)
+			pause_menu_node.resume.connect(player._on_pause_menu_resume) # Hookup resume signal from Pause Menu
+			pause_menu_node.close_pause_menu() # Making sure pause menu is closed on player scene load
+		else:
+			print("Player has no reference to pause menu.")
 		
 		## set the new player to the same position and rotation as the old player
 		player.position = player_position
 		player.rotation = player_rotation
+		## the connection mananger handled closing the menu, here we inform the new player of that
+		player._on_pause_menu_resume()
 		
 	return player
 
