@@ -23,8 +23,10 @@ func spawn_player():
 		destroy_single_player()
 		spawn(1)
 		
-		multiplayer.peer_connected.connect(spawn)
-		multiplayer.peer_disconnected.connect(_despawn_player)
+		if not multiplayer.peer_connected.is_connected(spawn):
+			multiplayer.peer_connected.connect(spawn)
+		if not multiplayer.peer_disconnected.is_connected(_despawn_player):
+			multiplayer.peer_disconnected.connect(_despawn_player)
 	
 	
 func destroy_single_player():

@@ -2,6 +2,9 @@ class_name SteamP2PConnectionMenu
 extends Node
 ## Manager for client and host for Steam Lobbies
 
+# FIXME: Client is jumping to position 0,0,0 when connected
+
+# TODO: Handle error: kEResultConnectFailed on client/server
 # TODO: Friends Lobbies: https://godotsteam.com/tutorials/friends_lobbies/
 # TODO: Fix the extra escape press needed after the menu is closed here and lan
 # TODO: Close any open connections before joining or hosting
@@ -75,7 +78,6 @@ func _on_host_steam_button_pressed():
 	multiplayer.multiplayer_peer = steam_peer
 	print("Starting Host...")
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Starting Host...")
-	## TODO: Show a message or dialogue about opening a server
 
 
 ## once the host button has been pressed, and the lobby is created, this will end up being called
@@ -85,12 +87,9 @@ func _on_lobby_created(connection_status, id):
 		## TODO: Allow the host to change the lobby name
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName() + "'s Lobby"))
 		Steam.setLobbyJoinable(lobby_id, true)
-		multiplayer_pause_menu.close_pause_menu()
 		print("Lobby Created Successfully")
 		player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Lobby Created Successfully")
-		
-		#spawn the host player
-		multiplayer_player_spawner.spawn_player()
+		## _on_lobby_joined will also be called
 
 
 ## used when clicking a related lobby button
@@ -101,7 +100,7 @@ func join_lobby(id : int):
 	print("Joining Lobby:%s" % id)
 	player_hud._on_set_hint_prompt(multiplayer_hint_icon, "Joining Lobby...")
 
-
+## called by both host and client after joining
 func _on_lobby_joined(_this_lobby_id: int, _permissions: int, _locked: bool, _response: int):
 	## TODO: Add a Cogito log
 	multiplayer_pause_menu.close_pause_menu()
