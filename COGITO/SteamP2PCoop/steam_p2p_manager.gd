@@ -4,10 +4,8 @@ extends Node
 ## Set this to whatever your SteamAppID is. 480 will work fine for testing.
 @export var SteamAppID : int = 480
 
-# FIXME: Controller not working in game
 # TODO: Utilize Save and Load
 # TODO: Add Callbacks for connected_to_server, connection failed, server disconnected
-# TODO: Smoothing for current player synced variables
 # TODO: Sync player held items, and rotation
 # TODO: Vote kick
 # TODO: Handle player death
