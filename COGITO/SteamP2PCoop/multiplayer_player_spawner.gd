@@ -58,10 +58,7 @@ func _spawn_player(id = 1) -> Node:
 		
 		var player_hud = get_tree().root.find_child("Player_HUD", true, false)
 		player.player_hud = player_hud.get_path()
-		## remove any prompts to prevent them from getting stuck
-		player_hud.delete_interaction_prompts()
-		player_hud.player = player
-		player_hud.setup_player.call_deferred()
+		player_hud.setup_player.call_deferred(player)
 		var pause_menu = get_tree().root.find_child("MultiplayerPauseMenu", true, false).get_path()
 		player.pause_menu = pause_menu
 		
