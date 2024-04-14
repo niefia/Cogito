@@ -1,15 +1,15 @@
 class_name CogitoSwitchSynchronizer
 extends Node
 
-@export var level_parent : Node
+@export var level_spawner : MultiplayerLevelSpawner
 
 var switch_array
 
 func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 
-func on_level_loaded():
-	switch_array = level_parent.find_children("", "CogitoSwitch", true, false)
+func _on_multiplayer_level_spawner_level_loaded():
+	switch_array = level_spawner.find_children("", "CogitoSwitch", true, false)
 	for switch in switch_array:
 		switch.switched.connect(_on_switch.bind(switch))
 
@@ -21,8 +21,8 @@ func _on_switch(is_on : bool, node : Node):
 @rpc("any_peer", "call_remote", "reliable")
 func rpc_on_switch(is_on : bool, switch_index : int):
 	if switch_index == -1:
-		printerr("CogitoSwitchSynchronizer: Received switch RPC for switch with id -1. 
-				The switch was not found in the switch_array")
+		printerr("CogitoSwitchSynchronizer: Received switch RPC for node with id -1. 
+				The node was not found in the array")
 		return
 	print ("received switch RPC for switch with id: %s" % switch_index)
 	_set_switch(switch_index, is_on)

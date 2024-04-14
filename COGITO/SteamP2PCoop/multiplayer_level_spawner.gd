@@ -3,9 +3,10 @@ extends MultiplayerSpawner
 ## Spawn in a single player level and convert it for MP use.
 ## This also synchronizes which level is currently loaded for all players.
 
+signal level_loaded
+
 @export var start_level : PackedScene
 @export var multiplayer_pause_menu : PackedScene
-@export var cogito_switch_synchronizer : CogitoSwitchSynchronizer
 
 func _ready():
 	spawn_function = _spawn_level
@@ -13,8 +14,7 @@ func _ready():
 	
 	## spawn the SP default level
 	spawn(start_level.resource_path)
-	call_deferred("_replace_pause_menu_with_mp_version")
-	call_deferred("_on_level_loaded")
+	_replace_pause_menu_with_mp_version.call_deferred()
 
 
 ## called when the level is spawned by the multiplayer spawner
@@ -41,7 +41,6 @@ func _replace_pause_menu_with_mp_version():
 	player.pause_menu = multiplayer_pause_menu_instance.get_path()
 	multiplayer_pause_menu_instance.resume.connect(player._on_pause_menu_resume) # Hookup resume signal from Pause Menu
 	multiplayer_pause_menu_instance.close_pause_menu() # Making sure pause menu is closed on player scene load
-
-
-func _on_level_loaded():
-	cogito_switch_synchronizer.on_level_loaded()
+	
+	#level is now fully loaded
+	level_loaded.emit()
