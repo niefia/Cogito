@@ -1,11 +1,11 @@
 @icon("res://COGITO/Assets/Graphics/Editor/CogitoNodeIcon.svg")
+class_name CogitoSwitch
 extends Node3D
+
 
 signal object_state_updated(interaction_text: String) #used to display correct interaction prompts
 signal switched(is_on: bool)
 signal damage_received(damage_value:float)
-
-@onready var audio_stream_player_3d = $AudioStreamPlayer3D
 
 ## Sets if object starts as on or off.
 @export var is_on : bool = false
@@ -34,6 +34,8 @@ signal damage_received(damage_value:float)
 var interaction_text : String 
 var player_interaction_component : PlayerInteractionComponent
 var interaction_nodes : Array[Node]
+
+@onready var audio_stream_player_3d = $AudioStreamPlayer3D
 
 func _ready():
 	self.add_to_group("interactable")
