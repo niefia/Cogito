@@ -24,6 +24,8 @@ func rpc_on_switch(is_on : bool, switch_index : int):
 	print ("received switch RPC for switch with id: %s" % switch_index)
 	if not switch_array[switch_index].is_on == is_on:
 		## just calling switch again results in recursive signals
+		## calling the specific on or off functions will not play a sound effect
+		switch_array[switch_index].audio_stream_player_3d.play()
 		if is_on:
 			switch_array[switch_index].switch_on()
 		else:
