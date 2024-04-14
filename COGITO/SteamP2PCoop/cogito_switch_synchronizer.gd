@@ -5,6 +5,9 @@ extends Node
 
 var switch_array
 
+func _ready():
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
+
 func on_level_loaded():
 	switch_array = level_parent.find_children("", "CogitoSwitch", true, false)
 	for switch in switch_array:
@@ -18,10 +21,35 @@ func _on_switch(is_on : bool, node : Node):
 @rpc("any_peer", "call_remote", "reliable")
 func rpc_on_switch(is_on : bool, switch_index : int):
 	if switch_index == -1:
-		printerr("Received switch RPC for switch with id -1. 
+		printerr("CogitoSwitchSynchronizer: Received switch RPC for switch with id -1. 
 				The switch was not found in the switch_array")
 		return
 	print ("received switch RPC for switch with id: %s" % switch_index)
+	_set_switch(switch_index, is_on)
+
+func _on_connected_to_server():
+	_rpc_request_all_switch_states.rpc_id(1)
+
+@rpc("any_peer", "call_remote", "reliable")
+func _rpc_request_all_switch_states():
+	var state_array = []
+	for switch in switch_array:
+		state_array.push_back(switch.is_on)
+	_rpc_receive_all_switch_states.rpc(state_array)
+	print("server received request for all switch states")
+
+@rpc("authority", "call_remote", "reliable")
+func _rpc_receive_all_switch_states(state_array):
+	for n in state_array.size():
+		## prevent overflow
+		if n < switch_array.size():
+			_set_switch(n, state_array[n])
+		else:
+			printerr("CogitoSwitchSynchronizer: Received state array 
+					has more elements than switch_array!")
+	print("client received current switch state data")
+
+func _set_switch(switch_index : int, is_on : bool):
 	if not switch_array[switch_index].is_on == is_on:
 		## just calling switch again results in recursive signals
 		## calling the specific on or off functions will not play a sound effect
