@@ -2,20 +2,6 @@ class_name SteamP2PConnectionMenu
 extends Node
 ## Manager for client and host for Steam Lobbies
 
-# FIXME: Client is jumping to position 0,0,0 when connected
-
-# TODO: Handle error: kEResultConnectFailed on client/server
-# TODO: Friends Lobbies: https://godotsteam.com/tutorials/friends_lobbies/
-# TODO: Close any open connections before joining or hosting
-# TODO: Handle Disconnects
-
-# TODO: Steam.join_requested.connect(_on_lobby_join_requested)
-# TODO: Steam.lobby_chat_update.connect(_on_lobby_chat_update)
-# TODO: Steam.lobby_data_update.connect(_on_lobby_data_update)
-# TODO: Steam.lobby_invite.connect(_on_lobby_invite)
-# TODO: Steam.lobby_message.connect(_on_lobby_message)
-# TODO: Steam.persona_state_change.connect(_on_persona_change)
-
 @export var multiplayer_hint_icon : Texture2D
 @export var lobbies_container : Container
 
@@ -43,8 +29,6 @@ func open_lobby_list():
 		for child in lobbies_container.get_children():
 			child.queue_free()
 	
-	
-	## TODO: Search filters: https://godotsteam.com/tutorials/lobbies/
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	Steam.requestLobbyList()
 	print("Requesting Steam Lobby List")
@@ -68,10 +52,6 @@ func _on_lobby_match_list(lobbies):
 
 
 func _on_host_steam_button_pressed():
-	## TODO: Allow host to set lobby visibility
-	## TODO: Support Steam Invites
-	## TODO: Allow lobby passwords
-	## TODO: Set max players
 	## lobby types: https://godotsteam.com/tutorials/lobbies/
 	steam_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC, 32)
 	multiplayer.multiplayer_peer = steam_peer
@@ -83,7 +63,6 @@ func _on_host_steam_button_pressed():
 func _on_lobby_created(connection_status, id):
 	if connection_status:
 		lobby_id = id
-		## TODO: Allow the host to change the lobby name
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName() + "'s Lobby"))
 		Steam.setLobbyJoinable(lobby_id, true)
 		print("Lobby Created Successfully")

@@ -1,14 +1,6 @@
 extends Node
 ## Manages connections, hosting, and disconnect for LAN games
 
-#TODO: multiplayer.peer_connected.connect(_on_peer_connected)
-#TODO: multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-#TODO: multiplayer.server_disconnected.connect(_on_server_disconnected)
-
-# TODO: UPNP port forwarding? https://docs.godotengine.org/en/stable/classes/class_enetmultiplayerpeer.html
-# TODO: Fix the extra escape press needed after the menu is closed here and steam
-# TODO: Close any open connections before joining or hosting
-
 @export var multiplayer_hint_icon : Texture2D
 
 var multiplayer_pause_menu : CogitoMultiplayerPauseMenu
@@ -25,7 +17,6 @@ func _ready():
 
 
 func _on_host_lan_button_pressed():
-	## TODO: Allow host to set port
 	enet_peer.create_server(1027)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer_pause_menu.close_pause_menu()
@@ -37,7 +28,6 @@ func _on_host_lan_button_pressed():
 
 
 func _on_join_localhost_button_pressed():
-	## TODO: Allow player to set client ip and port to join
 	enet_peer.create_client("127.0.0.1", 1027)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer_pause_menu.close_pause_menu()
