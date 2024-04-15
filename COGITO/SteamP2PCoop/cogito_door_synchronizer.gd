@@ -8,6 +8,7 @@ var door_array
 
 func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	level_spawner.level_loaded.connect(_on_multiplayer_level_spawner_level_loaded)
 
 
 func _on_multiplayer_level_spawner_level_loaded():
