@@ -57,6 +57,8 @@ var is_showing_ui : bool
 @export var CAN_BUNNYHOP : bool = true
 @export var BUNNY_HOP_ACCELERATION : float = 0.1
 @export var INVERT_Y_AXIS : bool = true
+## How much strength the player has to push RigidBody3D objects.
+@export var PLAYER_PUSH_FORCE : float = 1.3
 
 @export_group("Headbob Properties")
 @export_enum("Minimal:0.1", "Average:0.7", "Full:1") var HEADBOBBLE : int
@@ -151,7 +153,6 @@ var slide_audio_player : AudioStreamPlayer3D
 @onready var jump_timer: Timer = $JumpCooldownTimer
 
 # Adding carryable position for item control.
-@onready var carryable_position = %CarryablePosition
 @onready var footstep_player = $FootstepPlayer
 @onready var footstep_surface_detector : FootstepSurfaceDetector = $FootstepPlayer
 
@@ -205,9 +206,7 @@ func _ready():
 		pause_menu_node.close_pause_menu() # Making sure pause menu is closed on player scene load
 	else:
 		print("Player has no reference to pause menu.")
-		
-	initial_carryable_height = carryable_position.position.y #DEPRECATED
-	
+
 	call_deferred("slide_audio_init")
 
 
@@ -423,9 +422,6 @@ func _physics_process(delta):
 	else:
 		input_dir = Vector2.ZERO
 	
-	# LERP the up/down rotation of whatever you're carrying.
-	carryable_position.rotation.z = lerp_angle(carryable_position.rotation.z, head.rotation.x, 5 * delta)
-	
 	# Processing analog stick mouselook
 	if joystick_h_event and !is_movement_paused:
 			if abs(joystick_h_event.get_axis_value()) > JOY_DEADZONE:
@@ -467,7 +463,6 @@ func _physics_process(delta):
 			current_speed = lerp(current_speed, CROUCHING_SPEED, delta * LERP_SPEED)
 		
 		head.position.y = lerp(head.position.y, CROUCHING_DEPTH, delta * LERP_SPEED)
-		carryable_position.position.y = lerp(carryable_position.position.y, initial_carryable_height-.8, delta * LERP_SPEED)
 		standing_collision_shape.disabled = true
 		crouching_collision_shape.disabled = false
 		wiggle_current_intensity = WIGGLE_ON_CROUCHING_INTENSITY
@@ -477,7 +472,6 @@ func _physics_process(delta):
 		is_crouching = true
 	else:
 		head.position.y = lerp(head.position.y, 0.0, delta * LERP_SPEED)
-		carryable_position.position.y = lerp(carryable_position.position.y, initial_carryable_height, delta * LERP_SPEED)
 		if head.position.y < CROUCHING_DEPTH/4:
 			# still transitioning from state
 			crouching_collision_shape.disabled = false
@@ -774,10 +768,14 @@ func _physics_process(delta):
 	if is_falling:
 		snap = Vector3.ZERO
 
-
-	#if !is_movement_paused:
 	move_and_slide()
 	
+	# Pushing RigidBody3Ds
+	for col_idx in get_slide_collision_count():
+		var col := get_slide_collision(col_idx)
+		if col.get_collider() is RigidBody3D:
+			col.get_collider().apply_central_impulse(-col.get_normal() * PLAYER_PUSH_FORCE)
+
 	# FOOTSTEP SOUNDS SYSTEM = CHECK IF ON GROUND AND MOVING
 	if is_on_floor() and velocity.length() >= 0.2:
 		if not sliding_timer.is_stopped():
