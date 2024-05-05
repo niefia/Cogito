@@ -2,6 +2,7 @@ extends InteractionComponent
 class_name CogitoCarryableComponent
 
 signal carry_state_changed(is_being_carried : bool)
+signal thrown(impulse)
 
 @export_group("Carriable Settings")
 @export var pick_up_sound : AudioStream
@@ -101,5 +102,7 @@ func throw(power):
 	if drop_sound:
 		audio_stream_player_3d.stream = drop_sound
 		audio_stream_player_3d.play()
-	print(name, ": Throwing with impulse force ", player_interaction_component.Get_Look_Direction() * power)
-	parent_object.apply_central_impulse(player_interaction_component.Get_Look_Direction() * power)
+	var impulse = player_interaction_component.Get_Look_Direction() * power
+	print(name, ": Throwing with impulse force ", impulse)
+	parent_object.apply_central_impulse(impulse)
+	thrown.emit(impulse)

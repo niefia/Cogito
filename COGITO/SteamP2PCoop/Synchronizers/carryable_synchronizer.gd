@@ -1,4 +1,4 @@
-extends MultiplayerSynchronizer
+extends Node
 
 @export var level_spawner : MultiplayerLevelSpawner
 
@@ -13,10 +13,26 @@ func _on_multiplayer_level_spawner_level_loaded():
 	carryable_array = level_spawner.find_children("", "CogitoCarryableComponent", true, false)
 	for carryable in carryable_array:
 		carryable.carry_state_changed.connect(_on_carry_state_changed.bind(carryable))
+		carryable.thrown.connect(_on_carryable_thrown.bind(carryable))
 
 
 func _on_carry_state_changed(is_being_carried : bool, node : Node):
 	_rpc_on_carry_state_changed.rpc(multiplayer.get_unique_id(), is_being_carried, carryable_array.find(node))
+
+func _on_carryable_thrown(impulse, node : Node):
+	## propogate the thrown force to all other users.
+	## if they were just holding the object they should have multiplayer authority
+	## this is to prevent recursive rpcs
+	if node.get_parent().is_multiplayer_authority():
+		_rpc_on_carryable_thrown.rpc(impulse, carryable_array.find(node))
+
+@rpc("any_peer", "call_remote", "reliable")
+func _rpc_on_carryable_thrown(impulse, carryable_index):
+	var carryable = carryable_array[carryable_index]
+	if carryable.drop_sound:
+		carryable.audio_stream_player_3d.stream = carryable.drop_sound
+		carryable.audio_stream_player_3d.play()
+	carryable.get_parent().apply_central_impulse(impulse)
 
 @rpc("any_peer", "call_local", "reliable")
 func _rpc_on_carry_state_changed(sender_id : int, is_being_carried : bool, carryable_index : int):
