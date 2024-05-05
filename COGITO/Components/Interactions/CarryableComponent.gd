@@ -52,7 +52,6 @@ func carry(_player_interaction_component:PlayerInteractionComponent):
 		hold()
 
 
-
 func _physics_process(_delta):
 	if is_being_carried:
 		carry_position = player_interaction_component.get_interaction_raycast_tip(carry_distance_offset)
@@ -60,8 +59,8 @@ func _physics_process(_delta):
 		
 		if(carry_position-parent_object.global_position).length() >= drop_distance:
 			leave()
-		
-		
+
+
 func _on_body_entered(body):
 	if body.is_in_group("Player") and is_being_carried:
 		leave()
