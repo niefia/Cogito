@@ -41,6 +41,10 @@ func _rpc_on_carry_state_changed(sender_id : int, is_being_carried : bool, carry
 				The node was not found in the array")
 		return
 	print ("received carry_state_changed RPC for carryable with id: %s" % carryable_index)
+	
+	## once a user picks this up the carry should be disabled for other players
+	carryable_array[carryable_index].is_disabled = is_being_carried
+	
 	if is_being_carried:
 		## authority must be changed to the user who picked it up on all clients
 		## the parent is the rigidbody of the carryable
