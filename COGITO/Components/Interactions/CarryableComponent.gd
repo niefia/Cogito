@@ -1,5 +1,7 @@
 extends InteractionComponent
-class_name CarryableComponent
+class_name CogitoCarryableComponent
+
+signal carry_state_changed(is_being_carried : bool)
 
 @export_group("Carriable Settings")
 @export var pick_up_sound : AudioStream
@@ -81,6 +83,7 @@ func hold():
 		audio_stream_player_3d.play()
 	
 	is_being_carried = true
+	carry_state_changed.emit(is_being_carried)
 
 
 func leave():
@@ -90,6 +93,7 @@ func leave():
 		player_interaction_component.stop_carrying()
 		player_interaction_component.interaction_raycast.remove_exception(parent_object)
 	is_being_carried = false
+	carry_state_changed.emit(is_being_carried)
 
 
 func throw(power):
