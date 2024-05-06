@@ -1,7 +1,10 @@
 extends Node
 
 @export var level_spawner : MultiplayerLevelSpawner
+## In seconds, how often the data should be sent for synced objects
+@export var replication_interval : float = 0.1
 
+var replication_timer : float = 0.0
 var carryable_array
 var currently_synced_objects = []
 
@@ -43,12 +46,14 @@ func _rpc_on_carry_state_changed(sender_id : int, is_being_carried : bool, carry
 	print ("received carry_state_changed RPC for carryable with id: %s" % carryable_index)
 	
 	## once a user picks this up the carry should be disabled for other players
-	carryable_array[carryable_index].is_disabled = is_being_carried
+	var carryable = carryable_array[carryable_index]
+	carryable.is_disabled = is_being_carried
 	
 	if is_being_carried:
 		## authority must be changed to the user who picked it up on all clients
 		## the parent is the rigidbody of the carryable
-		var carryable_parent = carryable_array[carryable_index].get_parent()
+		var carryable_parent = carryable.get_parent()
+		carryable_parent.gravity_scale = 0.0
 		print("setting multiplayer authority of %s to %s" % [carryable_parent.name, sender_id])
 		carryable_parent.set_multiplayer_authority(sender_id)
 		## add the index to the array of currently synced objects
@@ -56,10 +61,18 @@ func _rpc_on_carry_state_changed(sender_id : int, is_being_carried : bool, carry
 			## only add if it is not already in the list
 			currently_synced_objects.push_back(carryable_index)
 	else:
+		carryable.get_parent().gravity_scale = 1.0
 		## remove the index from the array of currently synced objects
 		currently_synced_objects.erase(carryable_index)
 
 func _physics_process(delta):
+	## timer for replication
+	replication_timer += delta
+	if replication_timer >= replication_interval:
+		replication_timer -= replication_interval
+	else: ## if timer is not met, abort syncing
+		return
+	
 	## only the multiplayer authority of the carryable will send its position data to the others
 	for synced_index in currently_synced_objects:
 		## since we stored the synced objects by index, we need to go get the object
