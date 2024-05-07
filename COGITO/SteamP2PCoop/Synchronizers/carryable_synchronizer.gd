@@ -32,6 +32,9 @@ func _on_carryable_thrown(impulse, node : Node):
 @rpc("any_peer", "call_remote", "reliable")
 func _rpc_on_carryable_thrown(impulse, carryable_index):
 	var carryable = carryable_array[carryable_index]
+	# TODO: Make a way to play this sound inside of the carryable
+	## This is poor separation of concerns, but I did not want to push a play
+	## sound function back to Cogito.
 	if carryable.drop_sound:
 		carryable.audio_stream_player_3d.stream = carryable.drop_sound
 		carryable.audio_stream_player_3d.play()
