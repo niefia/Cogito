@@ -1,12 +1,15 @@
+class_name CogitoCarryableSynchronizer
 extends Node
 
 @export var level_spawner : MultiplayerLevelSpawner
+
 ## In seconds, how often the data should be sent for synced objects
 @export var replication_interval : float = 0.1
 
 var replication_timer : float = 0.0
 var carryable_array
 var currently_synced_objects = []
+
 
 func _ready():
 	level_spawner.level_loaded.connect(_on_multiplayer_level_spawner_level_loaded)

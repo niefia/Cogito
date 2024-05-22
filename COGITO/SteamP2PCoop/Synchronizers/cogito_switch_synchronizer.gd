@@ -5,6 +5,7 @@ extends Node
 
 var switch_array
 
+
 func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	level_spawner.level_loaded.connect(_on_multiplayer_level_spawner_level_loaded)
@@ -61,6 +62,7 @@ func _set_switch(switch_index : int, is_on : bool):
 	if not switch_array[switch_index].is_on == is_on:
 		## just calling switch again results in recursive signals
 		## calling the specific on or off functions will not play a sound effect
+		## TODO: This is not good separation of concerns
 		switch_array[switch_index].audio_stream_player_3d.play()
 		if is_on:
 			switch_array[switch_index].switch_on()
