@@ -18,8 +18,7 @@ func _ready():
 
 
 func spawn_player():
-	if is_multiplayer_authority():
-		
+
 		destroy_single_player()
 		spawn(1)
 		
@@ -37,10 +36,9 @@ func destroy_single_player():
 	player_rotation = (player as Node3D).global_rotation
 	
 	if player:
-		print("Player found, destroying")
 		player.queue_free()
 	else:
-		printerr("No single player was found to destroy")
+		printerr("MultiplayerPlayerSpawner: No single player was found to destroy")
 
 
 func _spawn_player(id = 1) -> Node:
@@ -54,7 +52,7 @@ func _spawn_player(id = 1) -> Node:
 	else:
 		print("CLIENT: Player spawned with id: " + str(id))
 	
-	if is_multiplayer_authority():
+	if id == multiplayer.get_unique_id():
 		
 		var player_hud = get_tree().root.find_child("Player_HUD", true, false)
 		player.player_hud = player_hud.get_path()
