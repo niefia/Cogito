@@ -34,9 +34,13 @@ window/size/initial_position_type=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="Cogito"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/input_helper/plugin.cfg", "res://addons/quick_audio/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/quick_audio/plugin.cfg")
 
 [file_customization]
 
