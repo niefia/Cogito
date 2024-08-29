@@ -5,7 +5,6 @@ extends CogitoDoor
 var Health: CogitoHealthAttribute
 var Hitbox: Node
 
-
 func _func_godot_apply_properties(props: Dictionary) -> void:
 	set_name("CogitoBreakable")
 	
@@ -14,20 +13,19 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	add_child(Health)
 	Health.set_owner(get_owner())
 	
-	#Set properties
-	Health.sound_on_damage_taken = load("res://COGITO/Assets/Audio/Kenney/Impacts/impactPlank_medium_004.ogg")
-	#Health.sound_on_death = load()
-	#Health.spawn_on_death = load()
-
+	#Set external properties
+	Health.sound_on_damage_taken = load(props["sound_on_damage_taken"])
+	Health.sound_on_damage_taken = load(props["sound_on_death"])
+	Health.value_max = props["value_max"]
+	Health.value_start = props["value_start"]
+	
+	#Set attribute to be Health using defaults
 	Health.set_name("CogitoHealth")
 	Health.attribute_name = "health"
 	Health.attribute_display_name = "Health"
 	Health.attribute_color = "ba0000"
 	Health.attribute_icon = load("res://COGITO/Assets/Graphics/UiIcons/Ui_Icon_Health.png")
-	Health.value_max = 5
-	Health.value_start = 5
 
-	
 	#Add Hitbox node
 	Hitbox = Node.new()
 	add_child(Hitbox)

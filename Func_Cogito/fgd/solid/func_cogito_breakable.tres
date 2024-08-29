@@ -22,7 +22,12 @@ classname = "cogito_breakable"
 description = "Adds health property to Brush making it Break upon damage"
 func_godot_internal = false
 base_classes = Array[Resource]([])
-class_properties = {}
+class_properties = {
+"sound_on_damage_taken": "res://COGITO/Assets/Audio/Kenney/Impacts/impactPlank_medium_002.ogg",
+"sound_on_death": "res://COGITO/Assets/Audio/Kenney/Impacts/impactPlank_medium_004.ogg",
+"value_max": 5,
+"value_start": 5
+}
 class_property_descriptions = {}
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
