@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=2 format=3 uid="uid://crka55sgtwurg"]
+
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_sqams"]
+
+[resource]
+script = ExtResource("1_sqams")
+export_file = false
+model_key_word_supported = true
+fgd_name = "PointFGD"
+base_fgd_files = Array[Resource]([])
+entity_definitions = Array[Resource]([])

@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=3 format=3 uid="uid://cxgoao5o0grlf"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=5 format=3 uid="uid://cxgoao5o0grlf"]
 
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_kuwtk"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_rru0u"]
+[ext_resource type="Resource" uid="uid://cd54gac5qt4rb" path="res://Func_Cogito/fgd/point/cogito_player_spawn.tres" id="3_lp72l"]
+[ext_resource type="Resource" uid="uid://o45oim5ng7v8" path="res://Func_Cogito/fgd/solid/func_cogito_door.tres" id="5_32oe1"]
 
 [resource]
 script = ExtResource("1_rru0u")
@@ -9,4 +11,4 @@ export_file = false
 model_key_word_supported = true
 fgd_name = "Cogito"
 base_fgd_files = Array[Resource]([ExtResource("1_kuwtk")])
-entity_definitions = Array[Resource]([])
+entity_definitions = Array[Resource]([ExtResource("3_lp72l"), ExtResource("5_32oe1"), null])

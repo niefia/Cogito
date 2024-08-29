@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDEntityClass" load_steps=2 format=3 uid="uid://bdcmy4x55bm46"]
+
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_entity_class.gd" id="1_p4hi8"]
+
+[resource]
+script = ExtResource("1_p4hi8")
+classname = ""
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+"flags": [["Player", 1, 0], ["BIG friend", 2, 0], ["Attentive friend", 4, 0], ["Happy friend", 8, 0]]
+}
+class_property_descriptions = {}
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""
