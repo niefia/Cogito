@@ -22,7 +22,17 @@ classname = "cogito_door"
 description = ""
 func_godot_internal = false
 base_classes = Array[Resource]([])
-class_properties = {}
+class_properties = {
+"close_sound": "res://COGITO/Assets/Audio/Kenney/doorClose_4.ogg",
+"interaction_text_when_closed": "Open",
+"interaction_text_when_locked": "Unlock",
+"interaction_text_when_open": "Close",
+"is_locked": false,
+"is_open": false,
+"open_sound": "res://COGITO/Assets/Audio/Kenney/doorOpen_1.ogg",
+"rattle_sound": "res://COGITO/Assets/Audio/Kenney/UiAudio/error_008.ogg",
+"unlock_sound": "res://COGITO/Assets/Audio/Kenney/beltHandle2.ogg"
+}
 class_property_descriptions = {}
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
