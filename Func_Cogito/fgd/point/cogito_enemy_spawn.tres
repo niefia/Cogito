@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://c0o70a2m3vtma"]
+
+[ext_resource type="PackedScene" uid="uid://dn4e1k7u3suoo" path="res://COGITO/Enemies/cogito_basic_enemy.tscn" id="1_ncftd"]
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_ed34p"]
+
+[resource]
+script = ExtResource("2_ed34p")
+scene_file = ExtResource("1_ncftd")
+apply_rotation_on_map_build = true
+classname = "cogito_enemy"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {}
+class_property_descriptions = {}
+meta_properties = {
+"color": Color(1, 0.0431373, 0.2, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""

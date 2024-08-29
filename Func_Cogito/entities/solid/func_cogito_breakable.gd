@@ -19,12 +19,15 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	Health.value_max = props["value_max"]
 	Health.value_start = props["value_start"]
 	
+	Health.spawn_on_death = load("res://COGITO/PackedScenes/simple_particle_puff.tscn")
+	
 	#Set attribute to be Health using defaults
 	Health.set_name("CogitoHealth")
 	Health.attribute_name = "health"
 	Health.attribute_display_name = "Health"
 	Health.attribute_color = "ba0000"
 	Health.attribute_icon = load("res://COGITO/Assets/Graphics/UiIcons/Ui_Icon_Health.png")
+
 
 	#Add Hitbox node
 	Hitbox = Node.new()
@@ -43,4 +46,4 @@ func _ready():
 	#Doesn't work to generate before runtime as it generates some sort of Temporary path instead
 	var parent_node_path = get_path()
 	$CogitoHealth.destroy_on_death.append(parent_node_path)
-
+	
