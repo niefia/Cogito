@@ -25,6 +25,7 @@ base_classes = Array[Resource]([])
 class_properties = {
 "close_sound": "res://COGITO/Assets/Audio/Kenney/doorClose_4.ogg",
 "door_width": 64,
+"hinge_side": "left",
 "interaction_text_when_closed": "Open",
 "interaction_text_when_locked": "Unlock",
 "interaction_text_when_open": "Close",

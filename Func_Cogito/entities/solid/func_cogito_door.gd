@@ -8,12 +8,14 @@ var interactor : InteractionComponent
 var rotate_direction: String = "x" 
 var ConvScale = 32
 var door_width = 64
+var hinge_side: String = "left"  
 
 func _func_godot_apply_properties(props: Dictionary) -> void:
 	
 	#custom non-cogito properties
 	rotate_direction = props["rotate_direction"]
 	door_width = props["door_width"]
+	hinge_side = props["hinge_side"]
 
 	#Apply audio properties
 	open_sound = load(props["open_sound"])
@@ -82,22 +84,43 @@ func _func_godot_build_complete():
 # needs further refinement for doors of different sizes
 
 func apply_rotation():
-
+	
+	#Auto get inverse scale factor 
+	var resource_path = "res://addons/func_godot/func_godot_default_map_settings.tres"
+	var settings_resource = load(resource_path)
+	ConvScale = settings_resource.get("inverse_scale_factor")
+	
 	#Scale door width using Inverse scale factor, then divide by 2 to get half of door width
 	var door_width_scaled = (door_width/ConvScale)/2
-
-	if rotate_direction == "x":
-		position.x += door_width_scaled
-		for child in get_children():
-			child.position.x -= door_width_scaled
-	elif rotate_direction == "y":
-		position.y += door_width_scaled
-		for child in get_children():
-			child.position.y -= door_width_scaled
-	elif rotate_direction == "z":
-		position.z += door_width_scaled
-		for child in get_children():
-			child.position.z -= door_width_scaled
 	
+	# Check the hinge_side and apply the corresponding rotation logic
+	if hinge_side == "left":
+		if rotate_direction == "x":
+			position.x += door_width_scaled
+			for child in get_children():
+				child.position.x -= door_width_scaled
+		elif rotate_direction == "y":
+			position.y += door_width_scaled
+			for child in get_children():
+				child.position.y -= door_width_scaled
+		elif rotate_direction == "z":
+			position.z -= door_width_scaled
+			for child in get_children():
+				child.position.z += door_width_scaled
+	elif hinge_side == "right":
+		if rotate_direction == "x":
+			position.x -= door_width_scaled
+			for child in get_children():
+				child.position.x += door_width_scaled
+		elif rotate_direction == "y":
+			position.y -= door_width_scaled
+			for child in get_children():
+				child.position.y += door_width_scaled
+		elif rotate_direction == "z":
+			position.z += door_width_scaled
+			for child in get_children():
+				child.position.z -= door_width_scaled
+
+
 
 
