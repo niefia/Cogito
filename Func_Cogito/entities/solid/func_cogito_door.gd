@@ -5,6 +5,11 @@ var audiostreamplayer: AudioStreamPlayer3D
 var cogito_door : AnimatableBody3D
 var interactor : InteractionComponent
 
+# Variables for Pivot fix
+var pivot_offset : Vector3 = Vector3.ZERO # Offset to move the pivot point to an edge
+var door_width : float = 0.0 # Door width
+
+
 func _func_godot_apply_properties(props: Dictionary) -> void:
 	
 	#Apply audio properties
@@ -36,6 +41,10 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	
 	open_rotation_deg = 90
 	closed_rotation_deg = 0
+	
+	# Calculate the door width and adjust pivot
+	#calculate_door_width()
+	#adjust_pivot()
 
 func _func_godot_build_complete():
 	#Setup Door node properties
