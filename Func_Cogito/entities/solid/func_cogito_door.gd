@@ -6,12 +6,15 @@ var cogito_door : AnimatableBody3D
 var interactor : InteractionComponent
 
 var rotate_direction: String = "x" 
-
+var ConvScale = 32
+var door_width = 64
 
 func _func_godot_apply_properties(props: Dictionary) -> void:
 	
+	#custom non-cogito properties
 	rotate_direction = props["rotate_direction"]
-	
+	door_width = props["door_width"]
+
 	#Apply audio properties
 	open_sound = load(props["open_sound"])
 	close_sound = load(props["close_sound"])
@@ -79,17 +82,22 @@ func _func_godot_build_complete():
 # needs further refinement for doors of different sizes
 
 func apply_rotation():
+
+	#Scale door width using Inverse scale factor, then divide by 2 to get half of door width
+	var door_width_scaled = (door_width/ConvScale)/2
+
 	if rotate_direction == "x":
-		position.x += 1
+		position.x += door_width_scaled
 		for child in get_children():
-			child.position.x -= 1
+			child.position.x -= door_width_scaled
 	elif rotate_direction == "y":
-		position.y += 1
+		position.y += door_width_scaled
 		for child in get_children():
-			child.position.y -= 1
+			child.position.y -= door_width_scaled
 	elif rotate_direction == "z":
-		position.z += 1
+		position.z += door_width_scaled
 		for child in get_children():
-			child.position.z -= 1
+			child.position.z -= door_width_scaled
+	
 
 

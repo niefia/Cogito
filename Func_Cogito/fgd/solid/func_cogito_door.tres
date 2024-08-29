@@ -24,6 +24,7 @@ func_godot_internal = false
 base_classes = Array[Resource]([])
 class_properties = {
 "close_sound": "res://COGITO/Assets/Audio/Kenney/doorClose_4.ogg",
+"door_width": 64,
 "interaction_text_when_closed": "Open",
 "interaction_text_when_locked": "Unlock",
 "interaction_text_when_open": "Close",
@@ -34,7 +35,9 @@ class_properties = {
 "rotate_direction": "x",
 "unlock_sound": "res://COGITO/Assets/Audio/Kenney/beltHandle2.ogg"
 }
-class_property_descriptions = {}
+class_property_descriptions = {
+"door_width": "Door width (in chosen axis) & Trenchbroom units, used for generating correct rotation"
+}
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
