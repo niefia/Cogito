@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://by06kk5hlp4xg" path="res://Func_Cogito/fgd/solid/func_cogito_breakable.tres" id="1_7s4wd"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_xydi2"]
 [ext_resource type="Resource" uid="uid://o45oim5ng7v8" path="res://Func_Cogito/fgd/solid/func_cogito_door.tres" id="2_qcakh"]
-[ext_resource type="Resource" uid="uid://c2ir5g2wwi43d" path="res://Func_Cogito/fgd/solid/func_cogito_lamp.tres" id="3_lyehs"]
+[ext_resource type="Resource" uid="uid://c2ir5g2wwi43d" path="res://Func_Cogito/fgd/solid/func_cogito_switch.tres" id="4_curmb"]
 [ext_resource type="Resource" uid="uid://bfam4hwnid1dk" path="res://Func_Cogito/fgd/solid/func_cogito_readable.tres" id="4_uc0yh"]
 
 [resource]
@@ -12,4 +12,4 @@ export_file = false
 model_key_word_supported = true
 fgd_name = "FuncGodot"
 base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("1_7s4wd"), ExtResource("2_qcakh"), ExtResource("3_lyehs"), ExtResource("4_uc0yh")])
+entity_definitions = Array[Resource]([ExtResource("1_7s4wd"), ExtResource("2_qcakh"), ExtResource("4_uc0yh"), ExtResource("4_curmb")])

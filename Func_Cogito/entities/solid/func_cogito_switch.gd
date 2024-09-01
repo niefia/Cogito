@@ -22,7 +22,7 @@ func interact(_player_interaction_component):
 func _func_godot_build_complete():
 	
 	#Setup Door node properties
-	set_name("CogitoLamp")
+	set_name("CogitoSwitch")
 	#Add Audiostream child node
 	audiostreamplayer = AudioStreamPlayer3D.new()
 	add_child(audiostreamplayer)

@@ -122,6 +122,8 @@ func apply_rotation():
 
 
 func _ready():
+	super._ready()
 	GAME.set_targetname(self, targetname)
-	
+
+
 
