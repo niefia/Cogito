@@ -9,8 +9,19 @@ var rotate_direction: String = "x"
 var ConvScale = 32
 var door_width = 64
 var hinge_side: String = "left"  
+@export var targetname: String = ""
 
 func _func_godot_apply_properties(props: Dictionary) -> void:
+	
+	#Add Audiostream child node
+	audiostreamplayer = AudioStreamPlayer3D.new()
+	audiostreamplayer.set_name("AudioStreamPlayer3D")
+	add_child(audiostreamplayer)
+	audiostreamplayer.set_owner(get_owner())
+	audiostreamplayer.set_name("AudioStreamPlayer3D")
+	audiostreamplayer.volume_db = -26
+	
+	targetname = props["targetname"] as String
 	
 	#custom non-cogito properties
 	rotate_direction = props["rotate_direction"]
@@ -47,22 +58,10 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	open_rotation_deg = 95
 	closed_rotation_deg = 0
 	
-	# Calculate the door width and adjust pivot
-	#calculate_door_width()
-	#adjust_pivot()
 
 func _func_godot_build_complete():
-	
 	#Setup Door node properties
 	set_name("CogitoDoor")
-	
-	#Add Audiostream child node
-	audiostreamplayer = AudioStreamPlayer3D.new()
-	add_child(audiostreamplayer)
-	audiostreamplayer.set_owner(get_owner())
-	audiostreamplayer.set_name("AudioStreamPlayer3D")
-	audiostreamplayer.volume_db = -26
-	
 	
 	#Add interactor child node
 	interactor = InteractionComponent.new()
@@ -122,5 +121,7 @@ func apply_rotation():
 				child.position.z -= door_width_scaled
 
 
-
+func _ready():
+	GAME.set_targetname(self, targetname)
+	
 

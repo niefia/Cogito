@@ -25,6 +25,7 @@ InputHelper="*res://addons/input_helper/input_helper.gd"
 Audio="*res://addons/quick_audio/./Audio.gd"
 CogitoSceneManager="*res://COGITO/SceneManagement/cogito_scene_manager.gd"
 CogitoQuestManager="*res://COGITO/QuestSystem/cogito_quest_manager.gd"
+GAME="*res://game_manager.gd"
 
 [display]
 

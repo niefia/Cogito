@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=9 format=3 uid="uid://cxgoao5o0grlf"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=7 format=3 uid="uid://cxgoao5o0grlf"]
 
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_kuwtk"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_rru0u"]
+[ext_resource type="Resource" uid="uid://cf5m8jv852lge" path="res://Func_Cogito/fgd/base/fgd_base.tres" id="2_uqa7h"]
+[ext_resource type="Resource" uid="uid://by04cdoeg3lv1" path="res://Func_Cogito/fgd/solid/func_cogito_solids.tres" id="3_5ogac"]
 [ext_resource type="Resource" uid="uid://cd54gac5qt4rb" path="res://Func_Cogito/fgd/point/cogito_player_spawn.tres" id="3_lp72l"]
-[ext_resource type="Resource" uid="uid://by06kk5hlp4xg" path="res://Func_Cogito/fgd/solid/func_cogito_breakable.tres" id="4_wx4do"]
-[ext_resource type="Resource" uid="uid://o45oim5ng7v8" path="res://Func_Cogito/fgd/solid/func_cogito_door.tres" id="5_32oe1"]
 [ext_resource type="Resource" uid="uid://c0o70a2m3vtma" path="res://Func_Cogito/fgd/point/cogito_enemy_spawn.tres" id="5_ig35u"]
-[ext_resource type="Resource" uid="uid://bfam4hwnid1dk" path="res://Func_Cogito/fgd/solid/func_cogito_readable.tres" id="6_1kdwt"]
-[ext_resource type="Resource" uid="uid://c2ir5g2wwi43d" path="res://Func_Cogito/fgd/solid/func_cogito_lamp.tres" id="7_b1dja"]
 
 [resource]
 script = ExtResource("1_rru0u")
 export_file = false
 model_key_word_supported = true
 fgd_name = "Cogito"
-base_fgd_files = Array[Resource]([ExtResource("1_kuwtk")])
-entity_definitions = Array[Resource]([ExtResource("3_lp72l"), ExtResource("5_32oe1"), ExtResource("4_wx4do"), ExtResource("5_ig35u"), ExtResource("6_1kdwt"), ExtResource("7_b1dja")])
+base_fgd_files = Array[Resource]([ExtResource("1_kuwtk"), ExtResource("2_uqa7h"), ExtResource("3_5ogac")])
+entity_definitions = Array[Resource]([ExtResource("3_lp72l"), ExtResource("5_ig35u")])

@@ -189,6 +189,18 @@ func unlock_door():
 	object_state_updated.emit(interaction_text)
 	lock_state_changed.emit(is_locked)
 
+func open_close():
+	if not is_locked:
+		if is_open:
+			is_open = false
+			set_to_closed_position()
+			interaction_text = interaction_text_when_closed
+		else:
+			set_to_open_position()
+			is_open = true
+			interaction_text = interaction_text_when_open
+		object_state_updated.emit(interaction_text)
+
 
 func open_door(interactor: Node3D):
 	audio_stream_player_3d.stream = open_sound

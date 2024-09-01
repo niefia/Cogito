@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDEntityClass" load_steps=2 format=3 uid="uid://bdcmy4x55bm46"]
+[gd_resource type="Resource" script_class="FuncGodotFGDEntityClass" load_steps=3 format=3 uid="uid://bdcmy4x55bm46"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_entity_class.gd" id="1_p4hi8"]
+[ext_resource type="Resource" uid="uid://wa53kbqe2tki" path="res://Func_Cogito/fgd/base/globalname_base.tres" id="1_pdrwk"]
 
 [resource]
 script = ExtResource("1_p4hi8")
-classname = ""
+classname = "Actor"
 description = ""
 func_godot_internal = false
-base_classes = Array[Resource]([])
+base_classes = Array[Resource]([ExtResource("1_pdrwk")])
 class_properties = {
 "flags": [["Player", 1, 0], ["BIG friend", 2, 0], ["Attentive friend", 4, 0], ["Happy friend", 8, 0]]
 }

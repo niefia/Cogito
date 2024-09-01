@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=4 format=3 uid="uid://cf5m8jv852lge"]
 
-[ext_resource type="Resource" uid="uid://wa53kbqe2tki" path="res://Func_Cogito/fgd/base/globalname_base.tres" id="1_7iqr2"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_bgngy"]
-[ext_resource type="Resource" uid="uid://bgybdntaoml5w" path="res://Func_Cogito/fgd/base/light_base.tres" id="2_v5nm7"]
+[ext_resource type="Resource" uid="uid://branea37hu7xf" path="res://Func_Cogito/fgd/base/targetname_base.tres" id="3_rn67w"]
+[ext_resource type="Resource" uid="uid://b20epugkub13b" path="res://Func_Cogito/fgd/base/target_base.tres" id="4_mnbj3"]
 
 [resource]
 script = ExtResource("1_bgngy")
@@ -10,4 +10,4 @@ export_file = false
 model_key_word_supported = true
 fgd_name = "FuncGodot"
 base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("1_7iqr2"), ExtResource("2_v5nm7")])
+entity_definitions = Array[Resource]([ExtResource("4_mnbj3"), ExtResource("3_rn67w"), null])

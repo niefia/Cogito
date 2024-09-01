@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDBaseClass" load_steps=3 format=3 uid="uid://bgybdntaoml5w"]
 
-[ext_resource type="Resource" uid="uid://wa53kbqe2tki" path="res://tb/fgd/base/globalname_base.tres" id="1_apa8g"]
+[ext_resource type="Resource" uid="uid://wa53kbqe2tki" path="res://Func_Cogito/fgd/base/globalname_base.tres" id="1_apa8g"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_base_class.gd" id="2_sgbhn"]
 
 [resource]

@@ -4,8 +4,21 @@ extends CogitoSwitch
 var audiostreamplayer : AudioStreamPlayer3D
 var interactor : InteractionComponent
 var omnilight : OmniLight3D
-#func _func_godot_apply_properties(props: Dictionary) -> void:
+
+@export var target: String = ""
+@export var targetfunc: String = ""
+@export var targetname: String = ""
+
+func _func_godot_apply_properties(props: Dictionary) -> void:
+	target = props["target"] as String
+	targetfunc = props["targetfunc"] as String
+	targetname = props["targetname"] as String
 	
+func interact(_player_interaction_component):
+	super.interact(_player_interaction_component)
+	GAME.use_targets(self, target)
+
+		
 func _func_godot_build_complete():
 	
 	#Setup Door node properties
