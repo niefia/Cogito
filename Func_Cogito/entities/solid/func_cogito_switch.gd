@@ -44,13 +44,5 @@ func _func_godot_build_complete():
 	interactor.ignore_open_gui = true
 	
 
-	#Add OmniLight3D child node
-	omnilight = OmniLight3D.new()
-	add_child(omnilight)
-	omnilight.set_owner(get_owner())
-	omnilight.set_name("OmniLight3D")
-	omnilight.visible = false
-	
-	nodes_to_show_when_on.append(omnilight)
 
 

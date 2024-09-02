@@ -15,7 +15,7 @@ func use_targets(activator: Node, target: String) -> void:
 	# Targetnames are really Godot Groups, so we can have multiple entities 
 	# share a common "targetname" in Trenchbroom.
 	var target_list: Array[Node] = get_tree().get_nodes_in_group(target)
-	print(target_list)
+	#print(target_list)
 	for targ in target_list:
 		var f: String
 		# Be careful when specifying a function since we can't pass arguments 

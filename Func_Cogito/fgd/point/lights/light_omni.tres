@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=6 format=3 uid="uid://co4xew3wrrae3"]
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=4 format=3 uid="uid://co4xew3wrrae3"]
 
-[ext_resource type="Resource" uid="uid://wa53kbqe2tki" path="res://Func_Cogito/fgd/base/globalname_base.tres" id="1_i6oye"]
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_icer5"]
 [ext_resource type="Resource" uid="uid://bgybdntaoml5w" path="res://Func_Cogito/fgd/base/light_base.tres" id="1_jrcvs"]
-[ext_resource type="Resource" uid="uid://b20epugkub13b" path="res://Func_Cogito/fgd/base/target_base.tres" id="2_ltb6a"]
-[ext_resource type="Resource" uid="uid://branea37hu7xf" path="res://Func_Cogito/fgd/base/targetname_base.tres" id="3_o1et0"]
+[ext_resource type="Script" path="res://Func_Cogito/entities/point/lights/light_omni.gd" id="3_3cw3y"]
 
 [resource]
 script = ExtResource("1_icer5")
+script_class = ExtResource("3_3cw3y")
 apply_rotation_on_map_build = true
 classname = "light_omni"
 description = ""
 func_godot_internal = false
-base_classes = Array[Resource]([ExtResource("1_i6oye"), ExtResource("1_jrcvs"), ExtResource("2_ltb6a"), ExtResource("3_o1et0")])
+base_classes = Array[Resource]([ExtResource("1_jrcvs")])
 class_properties = {
 "range": 320.0
 }
