@@ -11,8 +11,6 @@ extends Node3D
 
 @onready var _water_mesh : MeshInstance3D = $WaterPlane
 @onready var _audio_stream : AudioStreamPlayer3D = $AudioStreamPlayer3D
-@onready var _waterfall : Node3D = $WaterFall
-@onready var _waterfall2 : Node3D =$WaterFall2
 @onready var _waterImpact : Node3D = $WaterImpact
 @onready var _wetZone : Node3D = $WetZone2
 var _water_level_start_height : float
@@ -42,6 +40,9 @@ func interact(_player_interaction_component = null) -> void:
 		# Turn on the tap: Start filling, stop draining
 		_is_filling = true
 		_is_draining = false
+		_audio_stream.stop()
+		_audio_stream.pitch_scale = 1
+		_audio_stream.volume_db = -20
 		_audio_stream.play()
 		_set_effect_visibility(true)
 		_water_mesh.visible = true  # Ensure water mesh is visible when filling starts
@@ -50,6 +51,9 @@ func interact(_player_interaction_component = null) -> void:
 		_is_filling = false
 		_is_draining = true
 		_audio_stream.stop()
+		_audio_stream.pitch_scale = 0.25
+		_audio_stream.volume_db = -30
+		_audio_stream.play()
 		_set_effect_visibility(false)
 
 func _fill_sink(delta: float) -> void:
@@ -68,7 +72,6 @@ func _fill_sink(delta: float) -> void:
 	else:
 		# If the water is fully raised, just stop filling
 		_is_filling = false
-
 		# Ensure WetZone gets wet when fully filled
 		if is_instance_valid(_wetZone):
 			var wet_zone_script = _wetZone.get_script()
@@ -92,7 +95,7 @@ func _drain_sink(delta: float) -> void:
 		# If the water is fully drained, stop draining and hide the water mesh
 		_is_draining = false
 		_water_mesh.visible = false  # Hide the water mesh when fully drained
-
+		_audio_stream.stop()
 		# Ensure WetZone becomes dry when fully drained
 		if is_instance_valid(_wetZone):
 			var wet_zone_script = _wetZone.get_script()
@@ -101,8 +104,6 @@ func _drain_sink(delta: float) -> void:
 
 func _set_effect_visibility(visible: bool) -> void:
 	# Set the visibility of the water effects
-	_waterfall.visible = visible
-	_waterfall2.visible = visible
 	_waterImpact.visible = visible
 	#wetZone breaks on scene reload TODO: Figure out cause, and fix this
 	if is_instance_valid(_wetZone):
