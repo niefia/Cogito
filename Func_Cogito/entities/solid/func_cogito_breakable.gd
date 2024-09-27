@@ -19,7 +19,7 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	Health.value_max = props["value_max"]
 	Health.value_start = props["value_start"]
 	
-	#Health.spawn_on_death = load("res://COGITO/PackedScenes/simple_particle_puff.tscn")
+	Health.spawn_on_death.append(load("res://COGITO/PackedScenes/simple_particle_puff.tscn"))
 	
 	#Set attribute to be Health using defaults
 	Health.set_name("CogitoHealth")

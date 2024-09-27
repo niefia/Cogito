@@ -7,7 +7,7 @@ var interactor : InteractionComponent
 
 var rotate_direction: String = "x" 
 var ConvScale = 32
-var door_width = 64
+var door_width = 32
 var hinge_side: String = "left"  
 @export var targetname: String = ""
 

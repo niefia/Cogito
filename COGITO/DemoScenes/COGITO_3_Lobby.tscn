@@ -97,12 +97,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wjbty"]
 panorama = ExtResource("2_a8imk")
 
-[sub_resource type="Sky" id="Sky_cqwop"]
+[sub_resource type="Sky" id="Sky_mcrfa"]
 sky_material = SubResource("PanoramaSkyMaterial_wjbty")
 
 [sub_resource type="Environment" id="Environment_obnk3"]
 background_mode = 2
-sky = SubResource("Sky_cqwop")
+sky = SubResource("Sky_mcrfa")
 sky_rotation = Vector3(0, 1.74533, 0.174533)
 ambient_light_sky_contribution = 0.1
 ambient_light_energy = 0.2
