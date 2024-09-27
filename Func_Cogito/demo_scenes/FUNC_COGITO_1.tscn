@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cc5636wehspj6"]
+[gd_scene load_steps=80 format=3 uid="uid://cc5636wehspj6"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_rl6g4"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_rfj0w"]
@@ -21,12 +21,10 @@
 [ext_resource type="Material" uid="uid://c8scqc10ptmd7" path="res://tb/textures/Dark/texture_12.tres" id="18_5hp7j"]
 [ext_resource type="Script" path="res://COGITO/Components/Attributes/cogito_health_attribute.gd" id="19_51cmh"]
 [ext_resource type="AudioStream" uid="uid://c6ep078xmtg45" path="res://COGITO/Assets/Audio/Kenney/Impacts/impactPlank_medium_004.ogg" id="20_ijxgp"]
-[ext_resource type="PackedScene" uid="uid://bc2hryr610vgo" path="res://COGITO/PackedScenes/simple_particle_puff.tscn" id="21_ly8bl"]
 [ext_resource type="Texture2D" uid="uid://sv8b0kbpm17t" path="res://COGITO/Assets/Graphics/UiIcons/Ui_Icon_Health.png" id="22_c12c3"]
 [ext_resource type="Script" path="res://COGITO/Components/HitboxComponent.gd" id="23_f7ras"]
 [ext_resource type="Script" path="res://Func_Cogito/entities/solid/func_cogito_readable.gd" id="24_abotq"]
 [ext_resource type="PackedScene" uid="uid://cct0itdltyppg" path="res://COGITO/Components/Interactions/ReadableComponent.tscn" id="25_ld08l"]
-[ext_resource type="Script" path="res://COGITO/Components/Interactions/ReadableComponent.gd" id="26_44kmy"]
 [ext_resource type="AudioStream" uid="uid://d32mt2lrtuogk" path="res://COGITO/Assets/Audio/Kenney/bookOpen.ogg" id="26_mv3ar"]
 [ext_resource type="Script" path="res://Func_Cogito/entities/solid/func_cogito_ladder.gd" id="27_eowf6"]
 [ext_resource type="Script" path="res://Func_Cogito/entities/solid/func_cogito_switch.gd" id="27_opvb7"]
@@ -465,8 +463,6 @@ shape = SubResource("ConvexPolygonShape3D_b2gja")
 [node name="CogitoHealth" type="Node" parent="FuncGodotMap/CogitoBreakable"]
 script = ExtResource("19_51cmh")
 sound_on_damage_taken = ExtResource("20_ijxgp")
-destroy_on_death = Array[NodePath]([])
-spawn_on_death = ExtResource("21_ly8bl")
 attribute_name = "health"
 attribute_display_name = "Health"
 attribute_color = Color(0.729412, 0, 0, 1)
@@ -488,13 +484,10 @@ mesh = SubResource("ArrayMesh_50xew")
 [node name="entity_5_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/CogitoReadableBrush"]
 shape = SubResource("ConvexPolygonShape3D_1j6wt")
 
-[node name="ReadableComponent" type="Node3D" parent="FuncGodotMap/CogitoReadableBrush" instance=ExtResource("25_ld08l")]
-script = ExtResource("26_44kmy")
+[node name="ReadableComponent" parent="FuncGodotMap/CogitoReadableBrush" instance=ExtResource("25_ld08l")]
 interact_sound = ExtResource("26_mv3ar")
 readable_title = "func_cogito_readable Title"
 readable_content = "This message was created in Trenchbroom using a cogito_readable_brush entity"
-input_map_action = "interact"
-interaction_text = "Read"
 
 [node name="CogitoDoor2" type="AnimatableBody3D" parent="FuncGodotMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.375, 2, -3.25)

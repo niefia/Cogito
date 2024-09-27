@@ -21,6 +21,8 @@ var player_state_dir : String = CogitoSceneManager.cogito_state_dir + CogitoScen
 #New way of saving player attributes
 @export var player_attributes : Dictionary
 
+@export var player_currencies : Dictionary
+
 #Saving parameters from the player interaction component
 @export var interaction_component_state : Array
 
@@ -34,23 +36,34 @@ var player_state_dir : String = CogitoSceneManager.cogito_state_dir + CogitoScen
 @export var player_state_savetime : int
 @export var player_state_slot_name : String
 
+
 func add_player_attribute_to_state_data(name: String, attribute_data:Vector2):
 	player_attributes[name] = attribute_data
-	
+
+
 func clear_saved_attribute_data():
 	player_attributes.clear()
+
+
+func add_player_currency_to_state_data(name: String, currency_data:Vector2):
+	player_currencies[name] = currency_data
+
+
+func clear_saved_currency_data():
+	player_currencies.clear()
 
 
 func add_interaction_component_state_data_to_array(state_data):
 	interaction_component_state.append(state_data)
 
+
 func clear_saved_interaction_component_state():
 	interaction_component_state.clear()
 
-	
+
 func append_saved_wieldable_charges(saved_item_data):
 	saved_wieldable_charges.append(saved_item_data)
-	
+
 func clear_saved_wieldable_charges():
 	saved_wieldable_charges.clear()
 
@@ -62,7 +75,6 @@ func write_state(state_slot : String) -> void:
 	#var player_state_file = str(player_state_dir + state_slot + ".res")
 	ResourceSaver.save(self, player_state_file, ResourceSaver.FLAG_CHANGE_PATH)
 	print("Player state saved as ", player_state_file)
-
 
 
 func state_exists(state_slot : String) -> bool:

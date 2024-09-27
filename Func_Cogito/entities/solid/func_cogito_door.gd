@@ -120,6 +120,11 @@ func apply_rotation():
 			for child in get_children():
 				child.position.z -= door_width_scaled
 
+func toggle_door():
+	if is_open:
+		close_door(null)
+	else:
+		open_door(null)
 
 func _ready():
 	super._ready()
